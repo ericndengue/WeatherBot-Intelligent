@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WeatherBot Intelligent</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body data-theme="neutral">
+    <div id="bg-layer" class="bg-layer" aria-hidden="true"></div>
+    <div class="bg-scrim"></div>
+
+    <header class="top-bar">
+      <div class="brand">
+        <span class="brand-icon" aria-hidden="true">◐</span>
+        <div>
+          <h1>WeatherBot Intelligent</h1>
+          <p class="tagline">Conseils météo en temps réel</p>
+        </div>
+      </div>
+      <div class="toast-host" id="toast-host" aria-live="polite"></div>
+    </header>
+
+    <main class="layout">
+      <section class="panel panel-scroll" aria-label="Défilement des villes">
+        <div class="panel-head">
+          <h2>Villes</h2>
+          <span class="hint">Défilement automatique · clique pour activer</span>
+        </div>
+        <div class="carousel-wrap">
+          <div id="carousel" class="carousel"></div>
+        </div>
+      </section>
+
+      <section class="panel panel-detail" aria-live="polite" aria-label="Détail de la ville active">
+        <div class="panel-head">
+          <h2>Détail</h2>
+          <span id="active-city-label" class="active-pill">—</span>
+        </div>
+        <div id="detail" class="detail-card">
+          <p class="loading-msg">Chargement de la météo…</p>
+        </div>
+        <aside id="joke-banner" class="joke-banner" role="status" hidden>
+          <span class="joke-icon" aria-hidden="true">💬</span>
+          <p id="joke-text" class="joke-text"></p>
+        </aside>
+      </section>
+    </main>
+
+    <div class="fab-stack">
+      <button
+        type="button"
+        class="fab fab-secondary"
+        id="fab-geo"
+        title="Météo à ma position"
+        aria-label="Météo à ma position"
+      >
+        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+          <path
+            fill="currentColor"
+            d="M12 8a4 4 0 1 1 0 8 4 4 0 0 1 0-8m0-6a9.94 9.94 0 0 1 9.94 9.06A7.99 7.99 0 0 1 21 17.31V18a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-.69A7.99 7.99 0 0 1 2.06 11.06 9.94 9.94 0 0 1 12 2m0 2a7.94 7.94 0 0 0-7.87 6.74A6 6 0 0 0 7 17h10a6 6 0 0 0 2.87-6.26A7.94 7.94 0 0 0 12 4Z"
+          />
+        </svg>
+      </button>
+      <button
+        type="button"
+        class="fab fab-primary"
+        id="fab-chat"
+        title="Ouvrir le chat WeatherBot"
+        aria-label="Ouvrir le chat WeatherBot"
+      >
+        <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+          <path
+            fill="currentColor"
+            d="M12 3a9 9 0 0 0-9 9c0 1.92.6 3.7 1.62 5.16L3 21l4.06-1.52A8.94 8.94 0 0 0 12 21a9 9 0 0 0 9-9 9 9 0 0 0-9-9m0 2a7 7 0 0 1 7 7c0 1.4-.41 2.71-1.12 3.81l-.19.31.99 3.73-3.83-1.01-.31.19A6.96 6.96 0 0 1 12 19a7 7 0 0 1-7-7 7 7 0 0 1 7-7m1 4v5h2v2H9v-2h2v-5h2Z"
+          />
+        </svg>
+      </button>
+    </div>
+
+    <div id="chat-backdrop" class="modal-backdrop" hidden></div>
+    <div
+      id="chat-panel"
+      class="chat-panel"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="chat-title"
+      hidden
+    >
+      <div class="chat-header">
+        <h2 id="chat-title">WeatherBot</h2>
+        <button type="button" class="icon-btn" id="chat-close" aria-label="Fermer le chat">✕</button>
+      </div>
+      <div id="chat-messages" class="chat-messages"></div>
+      <form id="chat-form" class="chat-form">
+        <label class="sr-only" for="chat-city">Ville</label>
+        <input
+          id="chat-city"
+          type="text"
+          name="city"
+          placeholder="Ville (ex. Yaoundé)"
+          autocomplete="off"
+        />
+        <label class="sr-only" for="chat-msg">Message</label>
+        <input
+          id="chat-msg"
+          type="text"
+          name="message"
+          placeholder="Ou : météo à Douala…"
+          autocomplete="off"
+        />
+        <button type="submit" class="btn-send">Envoyer</button>
+      </form>
+    </div>
+
+    <script src="/app.js" type="module"></script>
+  </body>
+</html>

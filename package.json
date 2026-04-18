@@ -1,0 +1,18 @@
+{
+  "name": "weatherbot-intelligent",
+  "version": "1.0.0",
+  "description": "Chatbot météo WeatherBot — interface web + OpenWeatherMap",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2"
+  }
+}
